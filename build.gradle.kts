@@ -12,13 +12,6 @@ plugins {
     alias(libs.plugins.iridium.upload)
 }
 
-group = property("maven_group")!!
-version = property("mod_version")!!
-base.archivesName.set(modSettings.modId())
-
-val modrinth_id: String? by project
-val curse_id: String? by project
-
 repositories {
     maven("https://teamvoided.org/releases")
     maven("https://teamvoided.org/snapshots")
@@ -30,9 +23,9 @@ repositories {
 println("Task: " + gradle.startParameter.taskNames.joinToString(","))
 
 modSettings {
-    entrypoint("main", "org.teamvoided.template.Template::init")
-    entrypoint("client", "org.teamvoided.template.TemplateClient::init")
-    entrypoint("fabric-datagen", "org.teamvoided.template.data.gen.TemplateData")
+    entrypoint("main", "com.theendercore.dwarven_inventions.DwarvenInventions::init")
+    entrypoint("client", "com.theendercore.dwarven_inventions.DwarvenInventionsClient::init")
+    entrypoint("fabric-datagen", "com.theendercore.dwarven_inventions.data.gen.DwarvenInventionsData")
 
     mixinFile("${modId()}.client.mixins.json")
 //    mixinFile("${modId()}.mixins.json")
@@ -108,8 +101,8 @@ publishScript {
 
 uploadConfig {
 //    debugMode = true
-    modrinthId = modrinth_id
-    curseId = curse_id
+    modrinthId = "id"
+    curseId =  "0"
 
     // FabricApi
     modrinthDependency("P7dR8mSH", uploadConfig.REQUIRED)
